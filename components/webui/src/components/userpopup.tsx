@@ -1,32 +1,32 @@
-import * as React from 'react'
-import { Link } from 'react-router-dom'
-import './userpopup.css'
+import * as React from "react";
+import { Link } from "react-router-dom";
+import "./userpopup.css";
 
 interface IUser {
-    name: string,
-    userId: string
+    name: string;
+    userId: string;
 }
 
 export class UserPopup extends React.Component<any, IUser> {
 
-    constructor(props:any) {
+    constructor(props: any) {
 
         super(props);
 
-        this.state = { 
-            name: 'John Doe', 
-            userId: 'user@company.com' 
+        this.state = {
+            name: "John Doe",
+            userId: "user@company.com",
         };
     }
 
-    render() {
+    public render() {
         return (
             <div>
                 <h3>{this.state.name}</h3>
                 <p>{this.state.userId}</p>
 
                 <div className="contentRight" >
-                    <div><Link to='/login'>Logout</Link></div>
+                    <div><Link to="/login">Logout</Link></div>
                 </div>
             </div>
         );

@@ -1,13 +1,14 @@
 import * as React from "react";
 
-import '@blueprintjs/core/lib/css/blueprint.css';
+import { Alignment, Button, Callout, Card, Menu, MenuItem, Navbar, NavbarDivider, NavbarGroup,  NavbarHeading, Popover, PopoverInteractionKind, Position } from "@blueprintjs/core";
+import "@blueprintjs/core/lib/css/blueprint.css";
 
-import { Switch, Route, withRouter, Link } from "react-router-dom"
-import { Home } from './home' 
-import { Settings } from './settings'
-import './app.scss'
-import { Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Button, Position, Popover, PopoverInteractionKind, Alignment, MenuItem, Menu, Callout, Card } from '@blueprintjs/core'
-import { UserPopup } from './userpopup'
+import { Link, Route, Switch, withRouter } from "react-router-dom";
+
+import "./app.scss";
+import { Home } from "./home";
+import { Settings } from "./settings";
+import { UserPopup } from "./userpopup";
 
 interface IAppState {
     largeSidebar: boolean;
@@ -15,19 +16,13 @@ interface IAppState {
 
 export class App extends React.Component<any, IAppState> {
 
-    constructor(props:any, context?:any) {
+    constructor(props: any, context?: any) {
         super(props, context);
 
         this.state = { largeSidebar: false };
     }
 
-    
-    toggleLargeSidebar = () => {
-        this.setState((prevstate, props) => {  return { largeSidebar: !prevstate.largeSidebar} });
-    }
-    
-
-    render() {
+    public render() {
         // TODO: change this so that the text appears when the menu on the left is expanded rather than maintaing two versions of the sidebar
         // TODO: Switch sidebar to use Menu
 
@@ -40,7 +35,7 @@ export class App extends React.Component<any, IAppState> {
                             <NavbarDivider />
                             <NavbarHeading>typescript-react-template</NavbarHeading>
                         </NavbarGroup>
-                        <NavbarGroup align={Alignment.RIGHT}> 
+                        <NavbarGroup align={Alignment.RIGHT}>
                             <NavbarDivider />
                             <Popover inheritDarkTheme={false} popoverClassName="pt-popover-content-sizing" position={Position.BOTTOM_RIGHT} interactionKind={PopoverInteractionKind.HOVER} >
                                 <Button className="pt-minimal" icon="user" />
@@ -50,7 +45,7 @@ export class App extends React.Component<any, IAppState> {
                     </Navbar>
                 </div>
                 <div className="app-main">
-                    <div className={"app-sidebar" + (this.state.largeSidebar ? '' : ' small')} >
+                    <div className={"app-sidebar" + (this.state.largeSidebar ? "" : " small")} >
                         <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Dashboard" : ""} icon="dashboard" alignText={Alignment.LEFT} />
                         <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Tables" : ""}    icon="th" alignText={Alignment.LEFT} />
                         <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Hierarcy" : ""}    icon="layout-hierarchy" alignText={Alignment.LEFT} />
@@ -65,5 +60,9 @@ export class App extends React.Component<any, IAppState> {
                 </div>
             </div>
         );
+    }
+
+    private toggleLargeSidebar = () => {
+        this.setState((prevstate, props) => ({ largeSidebar: !prevstate.largeSidebar}));
     }
 }

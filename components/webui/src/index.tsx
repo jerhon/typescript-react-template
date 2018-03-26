@@ -1,17 +1,17 @@
+import * as popper from "popper.js";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {BrowserRouter, Route, Switch} from "react-router-dom"
-import * as popper from 'popper.js'
-import * as reactpopper from 'react-popper'
+import * as reactpopper from "react-popper";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import { App } from "./components/app";
 
-let a = popper.default.length
-let b = reactpopper.Popper.length
+const a = popper.default.length;
+const b = reactpopper.Popper.length;
 
 ReactDOM.render(
     <BrowserRouter >
         <App />
     </BrowserRouter>,
-    document.getElementById("app")
+    document.getElementById("app"),
 );

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
 export class Settings extends React.Component<{}, {}> {
 
-    render() {
+    public render() {
         return (
             <div>
                 <div>setting1</div>
