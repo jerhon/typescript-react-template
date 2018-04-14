@@ -1,0 +1,12 @@
+{
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "components/webui-apis/swagger.schema.json"
+            ],
+            "url": "http://swagger.io/v2/schema.json#"
+        }
+    ]
+}

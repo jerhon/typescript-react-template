@@ -18,6 +18,13 @@ The webui-apis folder is the APIs for the application.  The backend APIs are wri
 
 # dependencies
 
+In both the component directories just run install to get stated.
 ```
-npm install webpack -g
+npm install
 ```
+
+To start the backend and front for development run
+```
+npm start
+```
+in both directories.

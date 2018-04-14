@@ -4,13 +4,14 @@
   "description": "A template for a webui.",
   "main": "index.js",
   "scripts": {
-    "start" : "./node_modules/.bin/webpack-dev-server"
+    "start": "./node_modules/.bin/webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
+    "@types/react-redux": "^5.0.15",
     "@types/react-router": "^4.0.23",
     "@types/react-router-dom": "^4.2.5",
     "awesome-typescript-loader": "^4.0.1",
@@ -36,8 +37,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-popper": "^0.8.3",
+    "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-transition-group": "^2.2.1"
+    "react-transition-group": "^2.2.1",
+    "redux": "^3.7.2"
   }
 }

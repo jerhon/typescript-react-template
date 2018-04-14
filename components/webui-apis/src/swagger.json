@@ -1,0 +1,153 @@
+{
+    "$schema": "http://swagger.io/v2/schema.json#",
+    "swagger": "2.0",
+    "info": {
+        "description": "A set of APIs for an example application.",
+        "version": "0.1",
+        "title": "Sample APIs"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/user": {
+            "get": {
+                "operationId": "list-users",
+                "description": "Gets a list of users.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/$skip"
+                    },
+                    {
+                        "$ref": "#/parameters/$limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserDesc"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "upsert-users",
+                "description": "create or update a user",
+                "parameters": [
+                    {
+                        "in"  : "body",
+                        "name": "item",
+                        "schema": {
+                            "$ref": "#/defintions/UserDesc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user/{username}": {
+            "get": {
+                "operationId": "get-users",
+                "description": "get a user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name":"username",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema":{
+                            "$ref": "#/definitions/UserDesc"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/current": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UserDesc"
+                        }
+                    }
+                }
+            }
+        },
+        
+        "/items": {
+            "get": {
+                "description": "Gets a list of items.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/$skip"
+                    },
+                    {
+                        "$ref": "#/parameters/$limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ItemDesc"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "UserDesc": {
+            "properties": {
+                "fullname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "ItemDesc": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "$skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "skip a number of items",
+            "type": "integer",
+            "minimum": 0
+        },
+        "$limit": {
+            "name": "$limit",
+            "in": "query",
+            "description": "limit the number of items returned",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+        }
+    }
+}
