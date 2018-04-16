@@ -1,6 +1,9 @@
-import * as redux from 'redux';
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
 
+import { reducers } from "./reducers";
+import createInitialState from "./state";
 
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-
-redux.createStore()
+export const store = createStoreWithMiddleware(reducers, createInitialState() );
