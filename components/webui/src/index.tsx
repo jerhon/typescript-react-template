@@ -12,7 +12,11 @@ import { App } from "./components/app";
 const a = popper.default.length;
 const b = reactpopper.Popper.length;
 
+<<<<<<< HEAD
 import { store } from "./state";
+=======
+import { store } from "./state/store";
+>>>>>>> 863df32cb3c61b8cbb8fa6281e7c7cf7d93522fc
 
 ReactDOM.render(
     <Provider store={store}>
