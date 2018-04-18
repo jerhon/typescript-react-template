@@ -3,13 +3,13 @@ import * as React from "react";
 import { Alignment, Button, Callout, Card, Menu, MenuItem, Navbar, NavbarDivider, NavbarGroup,  NavbarHeading, Popover, PopoverInteractionKind, Position } from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
 
+import { connect } from "react-redux";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 
 import "./app.scss";
 import { Home } from "./home";
 import { Settings } from "./settings";
-import { UserPopup } from "./userpopup";
-import { connect } from "react-redux";
+import UserPopup from "./userpopup";
 
 import { getCurrentUser } from "../state/users";
 
@@ -21,7 +21,7 @@ interface IAppProps {
     getCurrentUser: void;
 }
 
-class App extends React.Component<any, IAppState> {
+export class App extends React.Component<any, IAppState> {
 
     constructor(props: any, context?: any) {
         super(props, context);
@@ -73,5 +73,3 @@ class App extends React.Component<any, IAppState> {
         this.setState((prevstate, props) => ({ largeSidebar: !prevstate.largeSidebar}));
     }
 }
-
-export default connect(App, (state) => { state }, (props) =>  )
