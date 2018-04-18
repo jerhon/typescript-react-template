@@ -1,17 +1,7 @@
 import { Dispatch } from "redux";
 
-import { getCurrentUser, IUser } from "../../model/user";
-import { IApplicationState } from "../state";
-
-enum ActionType {
-    LOAD_USER          = "LOAD_USER",
-    LOAD_USER_COMPLETE = "LOAD_USER_COMPLETE",
-    LOAD_USER_ERROR    = "LOAD_USER_ERROR",
-}
-
-interface IAction {
-    type: ActionType;
-}
+import { getCurrentUser as gcu, IUser } from "../../model/user";
+import { ActionType, IAction  } from "../action";
 
 interface IUserComplete extends IAction {
     type: ActionType.LOAD_USER_COMPLETE;
@@ -23,27 +13,13 @@ interface IUserError extends IAction {
     error: any;
 }
 
-export { IUser };
-
 export interface IUserState {
     current: IUser | null;
     loading: boolean;
     error: any | null;
 }
 
-export function requestUser() {
-    return (dispatch: Dispatch<IAction>) => {
-        dispatch(dispatch({ type: ActionType.LOAD_USER }));
-
-        getCurrentUser().then((u) => {
-            dispatch(dispatch({ type: ActionType.LOAD_USER_COMPLETE, user: u }));
-        }).catch((err) => {
-            dispatch(dispatch({ type: ActionType.LOAD_USER_ERROR, error: err }));
-        });
-    };
-}
-
-export function users(state: IUserState, action: IAction | IUserComplete) {
+export function usersReducer(state: IUserState, action: IAction | IUserComplete) {
     if (action.type === ActionType.LOAD_USER_COMPLETE) {
         state.loading = false;
         state.current = (action as IUserComplete).user;
@@ -54,4 +30,16 @@ export function users(state: IUserState, action: IAction | IUserComplete) {
         state.loading = false;
         state.error = action as IUserError;
     }
+}
+
+export function getCurrentUser() {
+    return (dispatch: Dispatch<IAction>) => {
+        dispatch(dispatch({ type: ActionType.LOAD_USER }));
+
+        gcu().then((u) => {
+            dispatch(dispatch({ type: ActionType.LOAD_USER_COMPLETE, user: u }));
+        }).catch((err) => {
+            dispatch(dispatch({ type: ActionType.LOAD_USER_ERROR, error: err }));
+        });
+    };
 }

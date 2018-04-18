@@ -53,7 +53,7 @@ export class Users {
     let user = await collection.findOne({ username: username });
     return user;
   }
-
+  
   isUserDesc(object: any): object is IUserKey {
     return 'username' in object;
   }

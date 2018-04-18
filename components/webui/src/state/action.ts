@@ -1,0 +1,16 @@
+export enum ActionType {
+
+  // ITEM ACTIONS
+  LOAD_ITEMS = "LOAD_ITEMS",
+  LOAD_ITEMS_COMPLETE = "LOAD_ITEMS_COMPLETE",
+  LOAD_ITEMS_ERROR = "LOAD_ITEMS_ERROR",
+
+  // USER ACTIONS
+  LOAD_USER          = "LOAD_USER",
+  LOAD_USER_COMPLETE = "LOAD_USER_COMPLETE",
+  LOAD_USER_ERROR    = "LOAD_USER_ERROR",
+}
+
+export interface IAction {
+  type: ActionType;
+}

@@ -9,12 +9,19 @@ import "./app.scss";
 import { Home } from "./home";
 import { Settings } from "./settings";
 import { UserPopup } from "./userpopup";
+import { connect } from "react-redux";
+
+import { getCurrentUser } from "../state/users";
 
 interface IAppState {
     largeSidebar: boolean;
 }
 
-export class App extends React.Component<any, IAppState> {
+interface IAppProps {
+    getCurrentUser: void;
+}
+
+class App extends React.Component<any, IAppState> {
 
     constructor(props: any, context?: any) {
         super(props, context);
@@ -66,3 +73,5 @@ export class App extends React.Component<any, IAppState> {
         this.setState((prevstate, props) => ({ largeSidebar: !prevstate.largeSidebar}));
     }
 }
+
+export default connect(App, (state) => { state }, (props) =>  )
