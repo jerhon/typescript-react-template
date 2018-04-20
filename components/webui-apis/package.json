@@ -4,7 +4,7 @@
   "description": "APIs to support the webui",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:watch": "nodemon --ext .ts,.json --exec \"ts-node src\\index.ts\""
   },
   "author": "",
   "license": "ISC",

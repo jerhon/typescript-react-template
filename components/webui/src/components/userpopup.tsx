@@ -21,6 +21,12 @@ class UserPopup extends React.Component<IUserProperties, any> {
         super(props);
     }
 
+    public componentDidMount() {
+        if (!this.props.user) {
+            this.props.getCurrentUser();
+        }
+    }
+
     public render() {
         let component: JSX.Element;
         if (this.props.user) {

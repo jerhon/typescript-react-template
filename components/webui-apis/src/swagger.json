@@ -26,6 +26,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
+                                "type": "object",
                                 "$ref": "#/definitions/UserDesc"
                             }
                         }
@@ -40,7 +41,7 @@
                         "in"  : "body",
                         "name": "item",
                         "schema": {
-                            "$ref": "#/defintions/UserDesc"
+                            "$ref": "#/definitions/UserDesc"
                         }
                     }
                 ],
@@ -73,7 +74,7 @@
                 }
             }
         },
-        "/user/current": {
+        "/user/me": {
             "get": {
                 "responses": {
                     "200": {
@@ -110,6 +111,7 @@
     },
     "definitions": {
         "UserDesc": {
+            "type":"object",
             "properties": {
                 "fullname": {
                     "type": "string"

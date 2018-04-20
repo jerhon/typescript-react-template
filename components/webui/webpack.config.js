@@ -28,9 +28,17 @@ module.exports = {
             { test: /\.css$/, use: ['style-loader', "css-loader"] },
             { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file-loader'},
             { test: /\.scss$/, use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'sass-loader'}]},
+            { test: /\.json$/, exclude: /node_modules/,  loader: 'json-loader' },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
+    },
+    
+    devServer: {
+        port:3000,
+        proxy: {
+            "/api":"http://localhost:3001"
+        }
     }
 };

@@ -1,11 +1,12 @@
 import bodyParser from "body-parser";
 import express from "express";
 import swaggerMiddleware from "swagger-express-middleware";
+import path from "path";
 
 
 const app = express();
 
-swaggerMiddleware('swagger.json', app, function (err, middleware) { 
+swaggerMiddleware(path.join(__dirname, 'swagger.json'), app, function (err, middleware) { 
     
     app.use(middleware.parseRequest());
     app.use(middleware.validateRequest());
@@ -31,10 +32,11 @@ swaggerMiddleware('swagger.json', app, function (err, middleware) {
     app.get('/api/user/me', (req, res) => {
         res.json({
             username: 'jeremy',
-            name: 'jeremy'
+            name: 'jeremy',
+            email: 'jeremy@jeremy.com'
         });
     });
 
-    app.listen(3000);
+    app.listen(3001);
 
 });

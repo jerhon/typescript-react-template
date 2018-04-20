@@ -19,27 +19,29 @@ export interface IUserState {
     error: any | null;
 }
 
-export function usersReducer(state: IUserState, action: IAction | IUserComplete) {
+export function users(state: IUserState, action: IAction | IUserComplete) {
+    console.log('action: ', action.type);
     if (action.type === ActionType.LOAD_USER_COMPLETE) {
-        state.loading = false;
-        state.current = (action as IUserComplete).user;
+        
+        return { ...state, loading: false, current: (action as IUserComplete).user };
     } else if (action.type === ActionType.LOAD_USER) {
-        state.loading = true;
-        state.current = null;
+        return {... state, loading: true, current: null };
     } else if (action.type === ActionType.LOAD_USER_ERROR) {
-        state.loading = false;
-        state.error = action as IUserError;
+        return {...state, loading: false, current: null, error: (action as IUserError).error}
+    } else {
+        return { loading: false, current: null, error: null };
     }
 }
 
 export function getCurrentUser() {
     return (dispatch: Dispatch<IAction>) => {
-        dispatch(dispatch({ type: ActionType.LOAD_USER }));
+        console.log('dispatched!');
+        dispatch({ type: ActionType.LOAD_USER });
 
         gcu().then((u) => {
-            dispatch(dispatch({ type: ActionType.LOAD_USER_COMPLETE, user: u }));
+            dispatch({ type: ActionType.LOAD_USER_COMPLETE, user: u });
         }).catch((err) => {
-            dispatch(dispatch({ type: ActionType.LOAD_USER_ERROR, error: err }));
+            dispatch({ type: ActionType.LOAD_USER_ERROR, error: err });
         });
     };
 }

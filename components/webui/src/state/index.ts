@@ -1,8 +1,8 @@
 
-import { applyMiddleware, combineReducers, createStore, Reducer } from "redux";
+import { Action, applyMiddleware, combineReducers, createStore, Dispatch, MiddlewareAPI, Reducer } from "redux";
 import thunk from "redux-thunk";
 
-import { getCurrentUser, IUserState, usersReducer } from "./users";
+import { getCurrentUser, IUserState, users } from "./users";
 
 export interface IItem {
     name: string;
@@ -13,6 +13,14 @@ export interface IApplicationState {
     users: IUserState;
     items: IItem[];
 }
+
+const logger = (api: MiddlewareAPI<IApplicationState>) => {
+    console.log('state', api.getState());
+    return (next: Dispatch<IApplicationState>) => (action: Action) => {
+        console.log("dispatching", action);
+        return next(action);
+    };
+  };
 
 function createInitialState(): IApplicationState {
     return {
@@ -26,9 +34,9 @@ function createInitialState(): IApplicationState {
 }
 
 const reducers = combineReducers({
-  usersReducer,
+  users,
 });
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(logger as any, thunk)(createStore);
 
 export const store = createStoreWithMiddleware(reducers, createInitialState());
