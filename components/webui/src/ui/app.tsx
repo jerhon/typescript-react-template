@@ -9,7 +9,7 @@ import { Link, Route, Switch, withRouter } from "react-router-dom";
 import "./app.scss";
 import { Home } from "./home";
 import { Settings } from "./settings";
-import UserPopup from "./userpopup";
+import UserPopup from "./users/userpopup";
 
 import { getCurrentUser } from "../state/users";
 

@@ -2,7 +2,11 @@
 import { Action, applyMiddleware, combineReducers, createStore, Dispatch, MiddlewareAPI, Reducer } from "redux";
 import thunk from "redux-thunk";
 
-import { getCurrentUser, IUserState, users } from "./users";
+
+import { getCurrentUser, IUserState, IUser, users } from "./users";
+
+export { IAction } from "./action";
+export { getCurrentUser, IUserState, IUser, users } from "./users";
 
 export interface IItem {
     name: string;

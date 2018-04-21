@@ -1,28 +1,32 @@
+import { Spinner } from "@blueprintjs/core";
 import * as React from "react";
+import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@blueprintjs/core";
+import "./userpopup.scss";
 
-import { getCurrentUser, IUser } from "../model/user";
-import { IApplicationState } from "../state";
-import "./userpopup.css";
-
-import { IUserState } from "../state/users";
+import { IApplicationState, IAction } from "../../state";
+import { getCurrentUser, IUser, IUserState } from "../../state/users"
 
 export interface IUserProperties {
     user: IUser | null;
+}
+
+export interface IUserMethods {
     getCurrentUser(): void;
 }
 
-class UserPopup extends React.Component<IUserProperties, any> {
+class UserPopup extends React.Component<IUserProperties & IUserMethods, any> {
 
-    constructor(props: IUserProperties) {
+    constructor(props: IUserProperties & IUserMethods) {
         super(props);
     }
 
     public componentDidMount() {
+        console.log('mounted!');
         if (!this.props.user) {
+            console.log('user!', this.props.getCurrentUser);
             this.props.getCurrentUser();
         }
     }
@@ -49,8 +53,11 @@ class UserPopup extends React.Component<IUserProperties, any> {
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-    getCurrentUser,
     user: state.users.current,
 } as IUserProperties);
 
-export default connect(mapStateToProps)(UserPopup);
+function mapDispatchToProps(dispatch : Dispatch<IAction>) : IUserMethods {
+    return bindActionCreators({ getCurrentUser }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPopup);

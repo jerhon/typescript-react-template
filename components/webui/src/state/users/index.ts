@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import { getCurrentUser as gcu, IUser } from "../../model/user";
+import { getCurrentUserApi, IUser } from "../../model/user";
 import { ActionType, IAction  } from "../action";
 
 interface IUserComplete extends IAction {
@@ -18,6 +18,8 @@ export interface IUserState {
     loading: boolean;
     error: any | null;
 }
+
+export { IUser } from '../../model/user'
 
 export function users(state: IUserState, action: IAction | IUserComplete) {
     console.log('action: ', action.type);
@@ -38,7 +40,7 @@ export function getCurrentUser() {
         console.log('dispatched!');
         dispatch({ type: ActionType.LOAD_USER });
 
-        gcu().then((u) => {
+        getCurrentUserApi().then((u) => {
             dispatch({ type: ActionType.LOAD_USER_COMPLETE, user: u });
         }).catch((err) => {
             dispatch({ type: ActionType.LOAD_USER_ERROR, error: err });

@@ -8,6 +8,6 @@ export interface IUser {
 /**
  * Gets the current user according to the JWT token pass.
  */
-export function getCurrentUser() {
+export function getCurrentUserApi() {
     return apiCall<IUser>("user/me");
 }
