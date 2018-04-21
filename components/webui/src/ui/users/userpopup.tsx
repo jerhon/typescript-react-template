@@ -29,28 +29,26 @@ class UserPopup extends React.Component<IUserState & IUserMethods, any> {
 
     public render() {
         let component: JSX.Element | null = null;
-        if (!this.props.loading) {
-            if (this.props.current) {
-                component = (<div className="userPopup">
-                    <h3>{this.props.current.name}</h3>
-                    <p>{this.props.current.email}</p>
+        if (this.props.current) {
+            component = (<div className="userPopup">
+                <h3>{this.props.current.name}</h3>
+                <p>{this.props.current.email}</p>
 
-                    <div className="contentRight" >
-                        <div><Link to="/login">Logout</Link></div>
-                    </div>
-                </div>);
-            }
-            if (this.props.error) {
-                component = (<div className="userPopup">
-                    <h3>Unable to load current user.</h3>
-                </div>)
-            }
-        } else {
+                <div className="contentRight" >
+                    <div><Link to="/login">Logout</Link></div>
+                </div>
+            </div>);
+        }    
+        if (this.props.error) {
+            component = (<div className="userPopup">
+                <h3>Unable to load current user.</h3>
+            </div>)
+        }
+        if (this.props.loading) {
             component = (<div className="userPopup">
                 <Spinner  />
             </div>);
         }
-
         return component || (<div>Undefined state!</div>);
     }
 }

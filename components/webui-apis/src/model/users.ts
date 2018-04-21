@@ -24,6 +24,10 @@ export class Users {
     return this._client.db().collection<IUserDesc>('users');
   }
 
+  /**
+   * Creates a user.
+   * @param user The object associated with the user.
+   */
   async create(user:IUserDesc) {
     // TODO: validate user before insertion
 
