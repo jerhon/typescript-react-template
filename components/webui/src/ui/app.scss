@@ -20,7 +20,7 @@
     .app-main {
         display: flex;
         flex-direction: row;
-        background: #eee;
+        background: #fff;
         flex: 0 0 auto;
         
         .item-selector {
@@ -41,15 +41,22 @@
 
         .app-sidebar {
             display: flex;
+            flex: 1 1 auto;
             flex-direction: column;
+            
+            margin-left: auto;
+
             background-color: #eee;
-            flex: 0 0 auto;
             box-shadow: 0px 0px 8px #aaa;
             border-right: #ccc 1px solid;
             transition: width 100ms;
-            align-content: flex-start;
-            width: 125px;
+            width: 160px;
             height: fill;
+            
+            button {
+                flex-basis: auto;
+                align-self: flex-start;
+            }
         
             .divider {
                 height: 1px;
@@ -65,7 +72,7 @@
             }
         
             &.small {
-                width: 65px;
+                width: 90px;
             }
         }
     

@@ -34,7 +34,7 @@ class UserPopup extends React.Component<IUserProperties & IUserMethods, any> {
     public render() {
         let component: JSX.Element;
         if (this.props.user) {
-            component = (<div>
+            component = (<div className="userPopup">
                 <h3>{this.props.user.name}</h3>
                 <p>{this.props.user.email}</p>
 
@@ -43,7 +43,7 @@ class UserPopup extends React.Component<IUserProperties & IUserMethods, any> {
                 </div>
             </div>);
         } else {
-            component = (<div>
+            component = (<div className="userPopup">
                 <Spinner  />
             </div>);
         }

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Alignment, Button, Callout, Card, Menu, MenuItem, Navbar, NavbarDivider, NavbarGroup,  NavbarHeading, Popover, PopoverInteractionKind, Position } from "@blueprintjs/core";
+import { Alignment, Button, Callout, Card, Menu, MenuItem, Navbar, NavbarDivider, NavbarGroup,  NavbarHeading, Popover, PopoverInteractionKind, Position, Label, Tooltip } from "@blueprintjs/core";
 import "@blueprintjs/core/lib/css/blueprint.css";
 
 import { connect } from "react-redux";
@@ -38,8 +38,6 @@ export class App extends React.Component<any, IAppState> {
                 <div className="app-header">
                     <Navbar className="pt-dark">
                         <NavbarGroup align={Alignment.LEFT} >
-                            <Button className="pt-minimal pt-large" icon={this.state.largeSidebar ? "menu-closed" : "menu-open"} alignText={Alignment.LEFT} onClick={this.toggleLargeSidebar} />
-                            <NavbarDivider />
                             <NavbarHeading>typescript-react-template</NavbarHeading>
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
@@ -51,13 +49,21 @@ export class App extends React.Component<any, IAppState> {
                         </NavbarGroup>
                     </Navbar>
                 </div>
-                <div className="app-main">
-                    <div className={"app-sidebar" + (this.state.largeSidebar ? "" : " small")} >
-                        <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Dashboard" : ""} icon="dashboard" alignText={Alignment.LEFT} />
-                        <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Tables" : ""}    icon="th" alignText={Alignment.LEFT} />
-                        <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Hierarcy" : ""}    icon="layout-hierarchy" alignText={Alignment.LEFT} />
+                <div className="app-main">                    
+                    <div className="app-sidebar" >
+                        <Tooltip content="Dashboard" position={Position.RIGHT}>
+                            <Button className="pt-minimal pt-large" icon="dashboard" alignText={Alignment.LEFT}  />
+                        </Tooltip>
+                        <Tooltip content="Tables" position={Position.RIGHT}>
+                            <Button className="pt-minimal pt-large" icon="th" alignText={Alignment.LEFT} />
+                        </Tooltip>
+                        <Tooltip content="Graph">
+                            <Button className="pt-minimal pt-large" icon="layout-hierarchy" alignText={Alignment.LEFT} />
+                        </Tooltip>
                         <div className="divider" />
-                        <Button className="pt-minimal pt-large" text={ this.state.largeSidebar ? "Settings" : ""} icon="cog" alignText={Alignment.LEFT} />
+                        <Tooltip content="Settings">
+                            <Button className="pt-minimal pt-large" icon="cog" alignText={Alignment.LEFT} />
+                        </Tooltip>
                     </div>
                     <div id="app-content">
                         <Switch>
