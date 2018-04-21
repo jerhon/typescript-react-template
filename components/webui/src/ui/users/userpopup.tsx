@@ -9,52 +9,54 @@ import "./userpopup.scss";
 import { IApplicationState, IAction } from "../../state";
 import { getCurrentUser, IUser, IUserState } from "../../state/users"
 
-export interface IUserProperties {
-    user: IUser | null;
-}
-
 export interface IUserMethods {
     getCurrentUser(): void;
 }
 
-class UserPopup extends React.Component<IUserProperties & IUserMethods, any> {
+class UserPopup extends React.Component<IUserState & IUserMethods, any> {
 
-    constructor(props: IUserProperties & IUserMethods) {
+    constructor(props: IUserState & IUserMethods) {
         super(props);
     }
 
     public componentDidMount() {
         console.log('mounted!');
-        if (!this.props.user) {
+        if (!this.props.current) {
             console.log('user!', this.props.getCurrentUser);
             this.props.getCurrentUser();
         }
     }
 
     public render() {
-        let component: JSX.Element;
-        if (this.props.user) {
-            component = (<div className="userPopup">
-                <h3>{this.props.user.name}</h3>
-                <p>{this.props.user.email}</p>
+        let component: JSX.Element | null = null;
+        if (!this.props.loading) {
+            if (this.props.current) {
+                component = (<div className="userPopup">
+                    <h3>{this.props.current.name}</h3>
+                    <p>{this.props.current.email}</p>
 
-                <div className="contentRight" >
-                    <div><Link to="/login">Logout</Link></div>
-                </div>
-            </div>);
+                    <div className="contentRight" >
+                        <div><Link to="/login">Logout</Link></div>
+                    </div>
+                </div>);
+            }
+            if (this.props.error) {
+                component = (<div className="userPopup">
+                    <h3>Unable to load current user.</h3>
+                </div>)
+            }
         } else {
             component = (<div className="userPopup">
                 <Spinner  />
             </div>);
         }
 
-        return component;
+        return component || (<div>Undefined state!</div>);
     }
 }
 
-const mapStateToProps = (state: IApplicationState) => ({
-    user: state.users.current,
-} as IUserProperties);
+const mapStateToProps = (state: IApplicationState) => ({ ...state.users
+} as IUserState);
 
 function mapDispatchToProps(dispatch : Dispatch<IAction>) : IUserMethods {
     return bindActionCreators({ getCurrentUser }, dispatch);

@@ -42,7 +42,7 @@ export class App extends React.Component<any, IAppState> {
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
                             <NavbarDivider />
-                            <Popover inheritDarkTheme={false} popoverClassName="pt-popover-content-sizing" position={Position.BOTTOM_RIGHT} interactionKind={PopoverInteractionKind.HOVER} >
+                            <Popover inheritDarkTheme={false} popoverClassName="pt-popover-content-sizing" position={Position.BOTTOM_RIGHT} interactionKind={PopoverInteractionKind.HOVER}  >
                                 <Button className="pt-minimal" icon="user" />
                                 <UserPopup />
                             </Popover>
@@ -51,17 +51,17 @@ export class App extends React.Component<any, IAppState> {
                 </div>
                 <div className="app-main">                    
                     <div className="app-sidebar" >
-                        <Tooltip content="Dashboard" position={Position.RIGHT}>
+                        <Tooltip content="Dashboard" position={Position.RIGHT} hoverOpenDelay={500} >
                             <Button className="pt-minimal pt-large" icon="dashboard" alignText={Alignment.LEFT}  />
                         </Tooltip>
-                        <Tooltip content="Tables" position={Position.RIGHT}>
+                        <Tooltip content="Tables" position={Position.RIGHT} hoverOpenDelay={500}>
                             <Button className="pt-minimal pt-large" icon="th" alignText={Alignment.LEFT} />
                         </Tooltip>
-                        <Tooltip content="Graph">
+                        <Tooltip content="Graph" hoverOpenDelay={500}>
                             <Button className="pt-minimal pt-large" icon="layout-hierarchy" alignText={Alignment.LEFT} />
                         </Tooltip>
                         <div className="divider" />
-                        <Tooltip content="Settings">
+                        <Tooltip content="Settings" hoverOpenDelay={500}>
                             <Button className="pt-minimal pt-large" icon="cog" alignText={Alignment.LEFT} />
                         </Tooltip>
                     </div>
