@@ -22,7 +22,6 @@ export interface IUserState {
 export { IUser } from '../../model/user'
 
 export function users(state: IUserState, action: IAction | IUserComplete) {
-    console.log('action: ', action.type);
     if (action.type === ActionType.LOAD_USER_COMPLETE) {
         
         return { ...state, loading: false, current: (action as IUserComplete).user };
@@ -37,7 +36,6 @@ export function users(state: IUserState, action: IAction | IUserComplete) {
 
 export function getCurrentUser() {
     return (dispatch: Dispatch<IAction>) => {
-        console.log('dispatched!');
         dispatch({ type: ActionType.LOAD_USER });
 
         getCurrentUserApi().then((u) => {

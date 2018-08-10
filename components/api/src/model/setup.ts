@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
-import { Users } from './users';
- 
+import { Users } from "./users";
+
 const MONGODB_CONNECT_STRING = "mongodb://localhost/react-sample" || process.env.MONGODB_CONNECT_STRING;
 
 export default async function connect() {

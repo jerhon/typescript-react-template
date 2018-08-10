@@ -20,9 +20,7 @@ class UserPopup extends React.Component<IUserState & IUserMethods, any> {
     }
 
     public componentDidMount() {
-        console.log('mounted!');
         if (!this.props.current) {
-            console.log('user!', this.props.getCurrentUser);
             this.props.getCurrentUser();
         }
     }

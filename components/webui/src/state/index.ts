@@ -18,13 +18,8 @@ export interface IApplicationState {
     items: IItem[];
 }
 
-const logger = (api: MiddlewareAPI<IApplicationState>) => {
-    console.log('state', api.getState());
-    return (next: Dispatch<IApplicationState>) => (action: Action) => {
-        console.log("dispatching", action);
-        return next(action);
-    };
-  };
+
+// TODO: Add redux dev tools
 
 function createInitialState(): IApplicationState {
     return {
@@ -41,6 +36,6 @@ const reducers = combineReducers({
   users,
 });
 
-const createStoreWithMiddleware = applyMiddleware(logger as any, thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 export const store = createStoreWithMiddleware(reducers, createInitialState());
