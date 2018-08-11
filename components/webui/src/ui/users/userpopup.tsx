@@ -31,10 +31,6 @@ class UserPopup extends React.Component<IUserState & IUserMethods, any> {
             component = (<div className="userPopup">
                 <h3>{this.props.current.name}</h3>
                 <p>{this.props.current.email}</p>
-
-                <div className="contentRight" >
-                    <div><Link to="/login">Logout</Link></div>
-                </div>
             </div>);
         }    
         if (this.props.error) {

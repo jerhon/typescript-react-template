@@ -8,51 +8,43 @@ import { Route, Switch, withRouter, RouteComponentProps, } from "react-router-do
 import "./app.scss";
 import { Home } from "./home";
 import UserPopup from "./users/userpopup";
+import AppAuthRouter from "./appauthrouter";
+import logo from "../honlSoft_white.svg"
 
 // This is the rare time that it will for the UI to use the model
 // This should eventually move back to an actionCreator / reducer that 
 // would take care of the auth.
 
-import Auth from "../model/auth";
+import Auth, { IAuthenticator } from "../model/auth";
 
 interface IAppState {
     largeSidebar: boolean;
 }
 
-interface IAppProps { }
-
-// TODO: move this into an AppAuth component
+interface IAppProps {
+}
 
 class App extends React.Component<IAppProps & RouteComponentProps<any>, IAppState> {
-
-    _auth: Auth;
-
 
     constructor(props: any, context?: any) {
         super(props, context);
 
         this.state = { largeSidebar: false };
-
-        this._auth = new Auth({
-            navigateHome: () => { this.props.history.push("/"); },
-            navigateError: () => { this.props.history.push("/error") }
-        });
     }
 
-    public renderHome() {
+    logoutClick() {
+        this.props.history.push("/logout");
+    }
 
-        // TODO: move this to a separate component
-        if (!this._auth.isAuthenticated()) {
-            this._auth.login();
-            return null;
-        }
-
+    public render() {
         return (
             <div className="app-layout">
                 <div className="app-header">
                     <Navbar className="pt-dark">
                         <NavbarGroup align={Alignment.LEFT} >
-                            <NavbarHeading>typescript-react-template</NavbarHeading>
+                            <img src={logo} />
+                            <div style={{width:10}} />
+                            <NavbarHeading>honlSoft Web Dashboard Template</NavbarHeading>
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
                             <NavbarDivider />
@@ -60,26 +52,27 @@ class App extends React.Component<IAppProps & RouteComponentProps<any>, IAppStat
                                 <Button className="pt-minimal" icon="user" />
                                 <UserPopup />
                             </Popover>
+                            <Button className="pt-minimal" icon="log-out" onClick={this.logoutClick.bind(this)} />
                         </NavbarGroup>
                     </Navbar>
                 </div>
                 <div className="app-main">
                     <div className="app-sidebar" >
-                        <Tooltip content="Dashboard" position={Position.RIGHT} hoverOpenDelay={500} >
+                        <Tooltip content="Dashboard" position={Position.RIGHT} hoverOpenDelay={1000} >
                             <Button className="pt-minimal pt-large" icon="dashboard" alignText={Alignment.LEFT} />
                         </Tooltip>
-                        <Tooltip content="Tables" position={Position.RIGHT} hoverOpenDelay={500}>
+                        <Tooltip content="Tables" position={Position.RIGHT} hoverOpenDelay={1000}>
                             <Button className="pt-minimal pt-large" icon="th" alignText={Alignment.LEFT} />
                         </Tooltip>
-                        <Tooltip content="Graph" hoverOpenDelay={500}>
+                        <Tooltip content="Graph" hoverOpenDelay={1000}>
                             <Button className="pt-minimal pt-large" icon="layout-hierarchy" alignText={Alignment.LEFT} />
                         </Tooltip>
                         <div className="divider" />
-                        <Tooltip content="Settings" hoverOpenDelay={500}>
+                        <Tooltip content="Settings" hoverOpenDelay={1000}>
                             <Button className="pt-minimal pt-large" icon="cog" alignText={Alignment.LEFT} />
                         </Tooltip>
                     </div>
-                    <div id="app-content">
+                    <div className="app-content">
                         <Switch>
                             <Route exact path="/" component={Home} />
                         </Switch>
@@ -87,36 +80,6 @@ class App extends React.Component<IAppProps & RouteComponentProps<any>, IAppStat
                 </div>
             </div>
         );
-    }
-
-    public renderError() {
-
-        return (<div>Unexpected error rendering page.</div>);
-    }
-
-    public renderAuthCallback() {
-        this._auth.handleAuthentication();
-
-        return (<Spinner />);
-    }
-
-    public render() {
-        // TODO: change this so that the text appears when the menu on the left is expanded rather than maintains two versions of the sidebar
-        // TODO: Switch sidebar to use Menu
-
-        // TODO: ADD 404
-        return (
-            <Switch>
-
-                <Route exact path="/error" render={this.renderError.bind(this)} />
-                <Route path="/callback" render={this.renderAuthCallback.bind(this)} />
-                <Route path="/" render={this.renderHome.bind(this)} />
-            </Switch>
-        );
-    }
-
-    private toggleLargeSidebar = () => {
-        this.setState((prevstate, props) => ({ largeSidebar: !prevstate.largeSidebar }));
     }
 }
 
